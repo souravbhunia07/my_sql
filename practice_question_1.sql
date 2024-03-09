@@ -27,7 +27,7 @@ CREATE TABLE student (
 );
 
 INSERT INTO student 
-(roll_no, name, marks, grade, city) 
+(roll_no, full_name, marks, grade, city) 
 VALUES
 (101, "Anil", 71, "C", "Delhi"),
 (102, "Anil1", 88, "A", "Banglore"),
@@ -46,3 +46,20 @@ SELECT city, COUNT(roll_no)
 FROM student
 GROUP BY city
 HAVING MAX(marks) > 95;
+
+TRUNCATE TABLE student;
+
+SELECT * FROM student;
+
+# Change the name column name to full_name
+ALTER TABLE student
+CHANGE name full_name VARCHAR(50);
+
+# Delete all the student who scored marks less than 80.
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM student
+WHERE marks < 80;
+
+# DELETE the column for grade
+ALTER TABLE student
+DROP COLUMN grade;

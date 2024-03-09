@@ -260,10 +260,106 @@ WHERE marks < 33;
 -- MODIFY col_name new_datatype new-constraint;
 
 ALTER TABLE student
-ADD COLUMN age INT;
+ADD COLUMN age INT NOT NULL DEFAULT 19;
 
 ALTER TABLE student
-dROP COLUMN age;
+MODIFY COLUMN age VARCHAR(2);
+
+ALTER TABLE student
+CHANGE age stu_age INT;
+
+ALTER TABLE student
+DROP COLUMN age;
+
+ALTER TABLE stu
+RENAME TO student;
 
 SELECT * FROM student;
 
+# TRUNCATE => to delete table's data
+-- TRUNCATE TABLE table_name;
+
+TRUNCATE TABLE student;
+
+# Joins in SQL => Joins is used to combine rows from two or more tables, based on a related column between them.
+-- Inner Join => Return records that have matching values in both tables
+-- SELECT column(s)
+-- FROM tableA
+-- INNER JOIN tableB
+-- ON tableA.col_name = tableb.col_name;
+
+CREATE TABLE Stu (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE Course (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+INSERT INTO Stu (id, name) VALUES
+(101, 'John Doe'),
+(102, 'Jane Smith'),
+(1033, 'Alice Johnson');
+
+INSERT INTO Course (id, name) VALUES
+(101, 'Mathematics'),
+(102, 'Physics'),
+(103, 'History');
+
+SELECT * FROM Course;
+
+SELECT * 
+FROM stu as s
+INNER JOIN Course as c
+ON s.id = c.id;
+
+# LEFT JOIN => Returns all the records from the left tables, and the matched record from the right table
+-- SEELCT column(s)
+-- FROM tableA
+-- LEFT JOIN tableB
+-- ON tableA.col_name = tableB.col_name;
+
+SELECT * 
+FROM stu as s
+LEFT JOIN Course as c
+ON s.id = c.id;
+
+# RIGHT JOIN => Returns all the records from the right tables, and the matched record from the left table
+-- SEELCT column(s)
+-- FROM tableA
+-- RIGHT JOIN tableB
+-- ON tableA.col_name = tableB.col_name;
+
+SELECT * 
+FROM stu as s
+RIGHT JOIN Course as c
+ON s.id = c.id;
+
+# RIGHT JOIN => Returns all the records when there is a match in either left or right table
+SELECT * FROM stu AS s
+LEFT JOIN Course AS c
+ON s.id = c.id
+UNION
+SELECT * FROM stu AS s
+RIGHT JOIN Course AS c
+ON s.id = c.id;
+
+# LEFT EXCLUSIVE JOIN
+SELECT * FROM stu AS s
+LEFT JOIN Course AS c
+ON s.id = c.id
+WHERE c.id IS NULL;
+
+# RIGHT EXCLUSIVE JOIN
+SELECT * FROM stu AS s
+RIGHT JOIN Course AS c
+ON s.id = c.id
+WHERE s.id IS NULL;
+
+# SELF JOIN => It is a regular join but the table is joined with itself
+-- SEELCT column(s)
+-- FROM table as a
+-- JOIN table as b
+-- ON a.col_name = b.col_name;
