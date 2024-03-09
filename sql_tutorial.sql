@@ -263,7 +263,7 @@ ALTER TABLE student
 ADD COLUMN age INT;
 
 ALTER TABLE student
-dROP COLUMN age;
+DROP COLUMN age;
 
 SELECT * FROM student;
 
