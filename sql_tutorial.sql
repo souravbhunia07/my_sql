@@ -263,6 +263,7 @@ ALTER TABLE student
 ADD COLUMN age INT NOT NULL DEFAULT 19;
 
 ALTER TABLE student
+<<<<<<< HEAD
 MODIFY COLUMN age VARCHAR(2);
 
 ALTER TABLE student
@@ -273,6 +274,9 @@ DROP COLUMN age;
 
 ALTER TABLE stu
 RENAME TO student;
+=======
+DROP COLUMN age;
+>>>>>>> 11e80d25ddc001748d31ebc8943b7cde6bb4fc0d
 
 SELECT * FROM student;
 
@@ -359,7 +363,7 @@ ON s.id = c.id
 WHERE s.id IS NULL;
 
 # SELF JOIN => It is a regular join but the table is joined with itself
--- SEELCT column(s)
+-- SELECT column(s)
 -- FROM table as a
 -- JOIN table as b
 -- ON a.col_name = b.col_name;
