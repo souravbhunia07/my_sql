@@ -367,3 +367,77 @@ WHERE s.id IS NULL;
 -- FROM table as a
 -- JOIN table as b
 -- ON a.col_name = b.col_name;
+
+CREATE TABLE employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    manager_id INT
+);
+
+-- Insert sample data into the employee table
+INSERT INTO employee (id, name, manager_id) VALUES
+(1, 'John Doe', NULL),   -- Assuming John Doe is the top manager with no manager
+(2, 'Jane Smith', 1),    -- Jane Smith reports to John Doe
+(3, 'Michael Johnson', 1),  -- Michael Johnson reports to John Doe
+(4, 'Emily Brown', 2),   -- Emily Brown reports to Jane Smith
+(5, 'David Lee', 3);     -- David Lee reports to Michael Johnson
+
+SELECT * FROM employee;
+
+SELECT a.name, b.name
+FROM employee AS a
+JOIN employee AS b
+ON a.id = b.manager_id;
+
+# UNION => It is used to combine the result set of two or more SELECT statements. Gives UNIQUE records.
+-- To use it:
+-- Every SELECT should have same number of columns
+-- Columns must have similar datatype
+-- Column in every SELECT should be in same order
+
+-- SELECT column(s) FROM tableA
+-- UNION
+-- SELECT column(s) FROM tableB
+
+SELECT name FROM employee  # Gives unique values
+UNION
+SELECT name FROM employee;
+
+SELECT name FROM employee  # Gives duplicate values also
+UNION ALL
+SELECT name FROM employee;
+
+# SQL sub queries => A subquery or inner query or a nested query is a query within another SQL query. It invloves 2 select statements
+-- SELECT column(s)
+-- FROM table_name
+-- WHERE col_name operator
+-- (subquery);
+
+SELECT AVG(marks)
+FROM student;
+
+SELECT name, marks
+FROM student
+WHERE marks > (SELECT AVG(marks) FROM student);
+
+SELECT name, roll_no
+FROM student
+WHERE roLl_no IN (
+	SELECT roll_no
+    FROM student 
+    WHERE roll_no % 2 = 0
+);
+
+SELECT MAX(marks)
+FROM (SELECT * FROM student WHERE city = "Delhi") AS temp;
+
+SELECT (SELECT MAX(marks) FROM student), name
+FROM student;
+
+# MYSQL views => A view is a virtual table based on the result-set of an SQL statement.
+CREATE VIEW view1 AS 
+SELECT roll_no, name, marks, grade FROM student;
+
+SELECT * FROM view1;
+
+DROP VIEW view1;
