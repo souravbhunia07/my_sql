@@ -140,6 +140,11 @@ SELECT * FROM student; # * select all column
 SELECT roll_no, marks FROM student;
 SELECT DISTINCT city FROM student;  # DISTINCT => Select all unique values of the column
 
+# Create a copy table from a table
+CREATE TABLE  table_name_1 
+AS
+SELECT [*]/column_name(s) FROM table_name_2 WHERE expression; 
+
 # WHERE => To define some conditions
 SELECT col1, col2 FROM table_name
 WHERE conditions;
