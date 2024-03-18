@@ -44,6 +44,9 @@ VALUES
 (102, "arjun"),
 (103, "ram");
 
+# Change the name of a column
+Write a query to change the column name 'Contact_No' to  'Phone_No' in the branch table.
+
 # Constraints:- Mainly 5 type => (UNIQUE, NOT NULL, PRIMARY KEY, FOREIGN KEY, DEFAULT)
 # NOT NULL
 # col1 INT NOT NULL;
